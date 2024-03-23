@@ -2,13 +2,8 @@ import DocumentMetadataRepository from '../src/documentMetadataRepository';
 import DatabaseTestHelpers from './databaseTestHelpers';
 
 describe('When getting document metadata by id', () => {
-  let testHelpers;
-  let documentMetadataRepository;
-
-  beforeAll(() => {
-    testHelpers = new DatabaseTestHelpers();
-    documentMetadataRepository = new DocumentMetadataRepository();
-  });
+  const testHelpers = new DatabaseTestHelpers();
+  const documentMetadataRepository = new DocumentMetadataRepository();
 
   afterAll(async () => {
     await testHelpers.teardown();
