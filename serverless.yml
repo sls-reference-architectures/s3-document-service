@@ -82,6 +82,10 @@ functions:
         Resource:
           - arn:aws:s3:::${self:custom.bucketName}
           - arn:aws:s3:::${self:custom.bucketName}/*
+
+package:
+  individually: true
+
 plugins:
   - serverless-esbuild
   - serverless-iam-roles-per-function
