@@ -33,7 +33,7 @@ functions:
     events:
       - httpApi:
           method: GET
-          path: /document-metadata/{id}
+          path: /document-metadataX/{id}
 
 plugins:
   - serverless-esbuild
