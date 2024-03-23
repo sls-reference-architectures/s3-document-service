@@ -1,4 +1,7 @@
+import DocumentMetadataRepository from '../documentMetadataRepository';
 import { getHeadObject } from '../s3Utils';
+
+const repo = new DocumentMetadataRepository();
 
 const handler = async (event) => {
   console.log(event);
@@ -8,10 +11,12 @@ const handler = async (event) => {
     },
   } = event;
   const { Metadata } = await getHeadObject(key);
-  console.log(Metadata);
-  // const documentMetadata = {
-  //   companyId: Metadata.
-  // }
+  const documentMetadata = {
+    companyId: Metadata.companyid,
+    fileName: Metadata.filename,
+    id: Metadata.fileid,
+  };
+  await repo.create(documentMetadata);
 };
 
 export default handler;

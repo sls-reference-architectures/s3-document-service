@@ -8,7 +8,7 @@ describe('When getting document metadata by id through API', () => {
   const s3TestHelpers = new S3TestHelpers();
 
   afterAll(async () => {
-    // await s3TestHelpers.teardown();
+    await s3TestHelpers.teardown();
   });
 
   it('should return a 201', async () => {
