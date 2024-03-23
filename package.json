@@ -1,0 +1,11 @@
+{
+  "name": "s3-document-service",
+  "version": "1.0.0",
+  "description": "A model pre-signed upload/download document service with events and metadata",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Seth Orell",
+  "license": "ISC"
+}
