@@ -4,8 +4,9 @@
   "description": "A model pre-signed upload/download document service with events and metadata",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:int": "npx jest --testMatch '**/?(*.)+(int.test).js' --config jest.config.int.js"
+    "test": "npx jest --testMatch '**/?(*.)+(unit.test).js'",
+    "test:int": "npx jest --testMatch '**/?(*.)+(int.test).js' --config jest.config.int.js",
+    "prepare": "husky"
   },
   "author": "Seth Orell",
   "license": "ISC",
@@ -14,10 +15,16 @@
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.12",
     "esbuild": "^0.20.2",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-no-only-tests": "^3.1.0",
     "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-extended": "^4.0.2",
     "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
     "serverless": "^3.38.0",
     "serverless-deployment-bucket": "^1.6.0",
     "serverless-esbuild": "^1.52.1",
@@ -28,5 +35,8 @@
     "@aws-sdk/client-dynamodb": "^3.540.0",
     "@aws-sdk/lib-dynamodb": "^3.540.0",
     "ulid": "^2.3.0"
+  },
+  "lint-staged": {
+    "*.{js,md}": "npx prettier --write --ignore-path .gitignore"
   }
 }

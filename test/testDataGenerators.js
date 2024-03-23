@@ -1,4 +1,4 @@
-import { ulid } from "ulid";
+import { ulid } from 'ulid';
 
 const createDocumentMetadataInput = (overrideWith) => {
   const documentMetadataInput = {
@@ -8,10 +8,10 @@ const createDocumentMetadataInput = (overrideWith) => {
 
   return {
     ...documentMetadataInput,
-    ...overrideWith
+    ...overrideWith,
   };
 };
 
-createTestId = () => `TEST_${ulid()}`;
+const createTestId = () => `TEST_${ulid()}`;
 
-export { createDocumentMetadataInput };
+export { createDocumentMetadataInput, createTestId };

@@ -1,6 +1,7 @@
-import { DeleteCommand, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
-import getDynamoDbClient from "./documentClient";
-import { ulid } from "ulid";
+import { DeleteCommand, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { ulid } from 'ulid';
+
+import getDynamoDbClient from './documentClient';
 
 const {
   env: { TABLE_NAME },
@@ -12,7 +13,7 @@ class DocumentMetadataRepository {
   }
 
   async create(documentMetadata) {
-    const itemToSave = { ...documentMetadata, id: ulid() }
+    const itemToSave = { ...documentMetadata, id: ulid() };
     const params = {
       TableName: TABLE_NAME,
       Item: itemToSave,
