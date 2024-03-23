@@ -40,10 +40,17 @@ describe('When getting document metadata by id through API', () => {
     // ASSERT
     expect(preSignedPost).toHaveProperty('url');
     expect(preSignedPost).toHaveProperty('id');
-    console.log('preSignedPost', preSignedPost);
-    // TODO: check headers
-    // expect(preSignedPost.fields['X-Amz-Meta-CompanyId']).toEqual(companyId);
-    // expect(preSignedPost.fields['X-Amz-Meta-FileName']).toEqual(payload.fileName);
-    // expect(preSignedPost.fields['X-Amz-Meta-SourceType']).toEqual(payload.sourceType);
+    expect(preSignedPost.headers).toContainEqual({
+      name: 'X-Amz-Meta-CompanyId',
+      value: companyId,
+    });
+    expect(preSignedPost.headers).toContainEqual({
+      name: 'X-Amz-Meta-FileName',
+      value: payload.fileName,
+    });
+    expect(preSignedPost.headers).toContainEqual({
+      name: 'X-Amz-Meta-SourceType',
+      value: payload.sourceType,
+    });
   });
 });
