@@ -1,4 +1,4 @@
-import { DeleteCommand, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DeleteCommand, GetCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { ulid } from 'ulid';
 
 import getDynamoDbClient from './documentClient';
@@ -31,6 +31,19 @@ class DocumentMetadataRepository {
     };
 
     await this.documentClient.send(new DeleteCommand(params));
+  }
+
+  async getByCompany(companyId) {
+    const params = {
+      TableName: TABLE_NAME,
+      KeyConditionExpression: 'companyId = :companyId',
+      ExpressionAttributeValues: {
+        ':companyId': companyId,
+      },
+    };
+    const { Items } = await this.documentClient.send(new QueryCommand(params));
+
+    return Items;
   }
 
   async getById({ companyId, id }) {
