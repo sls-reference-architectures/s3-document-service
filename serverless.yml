@@ -34,8 +34,6 @@ functions:
       - httpApi:
           method: GET
           path: /document-metadata/{id}
-          authorizer:
-            type: aws_iam
 
 plugins:
   - serverless-esbuild
