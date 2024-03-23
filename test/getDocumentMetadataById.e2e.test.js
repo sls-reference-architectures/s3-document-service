@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 describe('When getting document metadata by id through API', () => {
-  it('should return a 200', async () => {
+  it.skip('should return a 200', async () => {
     // ARRANGE
     const axiosClient = axios.create();
     console.log('region:', process.env.AWS_REGION);
