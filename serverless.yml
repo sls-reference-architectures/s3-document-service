@@ -11,7 +11,7 @@ provider:
     maxPreviousDeploymentArtifacts: 5
     serverSideEncryption: AES256
   environment:
-      TABLE_NAME: ${self:custom.tableName}
+    TABLE_NAME: ${self:custom.tableName}
   logRetentionInDays: 7
   name: aws
   region: us-east-1
@@ -34,12 +34,14 @@ functions:
       - httpApi:
           method: GET
           path: /document-metadata/{id}
+          authorizer: 
+            type: aws_iam
 
 plugins:
-- serverless-esbuild
-- serverless-iam-roles-per-function
-- serverless-deployment-bucket
-- serverless-prune-plugin
+  - serverless-esbuild
+  - serverless-iam-roles-per-function
+  - serverless-deployment-bucket
+  - serverless-prune-plugin
 
 resources:
   Resources:
@@ -65,13 +67,13 @@ resources:
       Properties:
         TableName: ${self:custom.tableName}
         AttributeDefinitions:
-        - AttributeName: companyId
-          AttributeType: S
-        - AttributeName: id
-          AttributeType: S
+          - AttributeName: companyId
+            AttributeType: S
+          - AttributeName: id
+            AttributeType: S
         KeySchema:
-        - AttributeName: companyId
-          KeyType: HASH
-        - AttributeName: id
-          KeyType: RANGE
+          - AttributeName: companyId
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST

@@ -1,6 +1,6 @@
-import DocumentMetadataRepository from "../src/documentMetadataRepository";
-import DatabaseTestHelpers from "./databaseTestHelpers";
-import { createDocumentMetadataInput } from "./testDataGenerators";
+import DocumentMetadataRepository from '../src/documentMetadataRepository';
+import DatabaseTestHelpers from './databaseTestHelpers';
+import { createDocumentMetadataInput } from './testDataGenerators';
 
 describe('When saving a document metadata', () => {
   let testHelpers;

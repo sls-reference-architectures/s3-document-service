@@ -1,5 +1,5 @@
-import DocumentMetadataRepository from "../src/documentMetadataRepository";
-import { createDocumentMetadataInput } from "./testDataGenerators";
+import DocumentMetadataRepository from '../src/documentMetadataRepository';
+import { createDocumentMetadataInput } from './testDataGenerators';
 
 class DatabaseTestHelpers {
   constructor() {
