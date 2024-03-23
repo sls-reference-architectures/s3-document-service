@@ -1,3 +1,4 @@
+import { HeadObjectCommand } from '@aws-sdk/client-s3';
 import { createPresignedPost as AWSCreatePresignedPost } from '@aws-sdk/s3-presigned-post';
 import { ulid } from 'ulid';
 
@@ -49,4 +50,16 @@ const createHeaderFields = ({ companyId, fileName, id, sourceType }) => {
   return fields;
 };
 
-export { createPreSignedPost };
+const getHeadObject = async (key) => {
+  const input = {
+    Bucket: process.env.BUCKET_NAME,
+    Key: key,
+  };
+  const command = new HeadObjectCommand(input);
+  const s3Client = getS3Client();
+  const result = await s3Client.send(command);
+
+  return result;
+};
+
+export { createPreSignedPost, getHeadObject };

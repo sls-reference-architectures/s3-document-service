@@ -2,8 +2,15 @@
 import axios from 'axios';
 import { faker } from '@faker-js/faker';
 import { createTestId } from './testDataGenerators';
+import S3TestHelpers from './s3TestHelpers';
 
 describe('When getting document metadata by id through API', () => {
+  const s3TestHelpers = new S3TestHelpers();
+
+  afterAll(async () => {
+    // await s3TestHelpers.teardown();
+  });
+
   it('should return a 201', async () => {
     // ARRANGE
     const axiosOptions = {
@@ -52,5 +59,22 @@ describe('When getting document metadata by id through API', () => {
       name: 'X-Amz-Meta-SourceType',
       value: payload.sourceType,
     });
+  });
+
+  it('should be a valid link to upload a file', async () => {
+    const axiosOptions = {
+      baseURL: process.env.API_URL,
+      headers: {
+        'x-company-id': createTestId(),
+      },
+    };
+    const payload = { fileName: `${createTestId()}.avif` };
+    const { data: preSignedPost } = await axios.post('/pre-signed-post', payload, axiosOptions);
+
+    // ACT
+    const uploadAction = () => s3TestHelpers.uploadTestFile(preSignedPost);
+
+    // ASSERT
+    await expect(uploadAction()).resolves.not.toThrow();
   });
 });
