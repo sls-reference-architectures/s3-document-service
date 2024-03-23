@@ -1,9 +1,18 @@
 import DocumentMetadataRepository from "../src/documentMetadataRepository";
+import { createDocumentMetadataInput } from "./testDataGenerators";
 
 class DatabaseTestHelpers {
   constructor() {
     this.documentMetadataKeys = [];
     this.repo = new DocumentMetadataRepository();
+  }
+
+  async injectDocumentMetadata(overrideWith) {
+    const input = createDocumentMetadataInput(overrideWith);
+    const documentMetadata = await this.repo.create(input);
+    this.trackKeyForTeardown(documentMetadata);
+
+    return documentMetadata;
   }
 
   async teardown() {

@@ -1,6 +1,6 @@
 import { ulid } from "ulid";
 
-const createDocumentMetadataInput = async (overrideWith) => {
+const createDocumentMetadataInput = (overrideWith) => {
   const documentMetadataInput = {
     companyId: createTestId(),
     objectKey: createTestId(),

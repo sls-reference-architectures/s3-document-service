@@ -2,7 +2,7 @@ import DocumentMetadataRepository from "../src/documentMetadataRepository";
 import DatabaseTestHelpers from "./databaseTestHelpers";
 import { createDocumentMetadataInput } from "./testDataGenerators";
 
-describe('When saving a document metadata', () => {
+describe('When getting document metadata by id', () => {
   let testHelpers;
   let documentMetadataRepository;
 
@@ -17,14 +17,12 @@ describe('When saving a document metadata', () => {
 
   it('should succeed (baseline)', async () => {
     // ARRANGE
-    const documentMetadataInput = createDocumentMetadataInput();
+    const { id, companyId, objectKey } = await testHelpers.injectDocumentMetadata();
 
     // ACT
-    const documentMetadata = await documentMetadataRepository.create(documentMetadataInput);
-    testHelpers.trackKeyForTeardown(documentMetadata);
+    const documentMetadata = await documentMetadataRepository.getById({ id, companyId });
 
     // ASSERT
-    expect(documentMetadata).toBeDefined();
-    expect(documentMetadata.id).toBeString();
+    expect(documentMetadata.objectKey).toEqual(objectKey);
   });
 });
