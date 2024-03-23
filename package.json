@@ -7,5 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Seth Orell",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.20.2",
+    "serverless": "^3.38.0",
+    "serverless-deployment-bucket": "^1.6.0",
+    "serverless-esbuild": "^1.52.1",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-prune-plugin": "^2.0.2"
+  }
 }

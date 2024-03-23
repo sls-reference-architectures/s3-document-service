@@ -1,0 +1,63 @@
+service: s3-document-service
+
+frameworkVersion: 3.x
+
+configValidationMode: error
+
+provider:
+  architecture: arm64
+  deploymentBucket:
+    name: com.reference-architecture.deploys
+    maxPreviousDeploymentArtifacts: 5
+    serverSideEncryption: AES256
+  logRetentionInDays: 7
+  name: aws
+  region: us-east-1
+  runtime: nodejs20.x
+  stage: dev
+
+custom:
+  bucketName: com.reference-architecture.${self:service}
+  esbuild:
+    minify: true
+  prune:
+    automatic: true
+    number: 1
+  tableName: ${self:service}
+
+plugins:
+- serverless-esbuild
+- serverless-iam-roles-per-function
+- serverless-deployment-bucket
+- serverless-prune-plugin
+
+resources:
+  Resources:
+    DocumentBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: Private
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
+        BucketName: ${self:custom.bucketName}
+        NotificationConfiguration:
+          EventBridgeConfiguration:
+            EventBridgeEnabled: true
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
+    DocumentTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
