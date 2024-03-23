@@ -24,11 +24,11 @@ describe('When getting document metadata by company', () => {
     await retry(
       async () => {
         // ACT
-        const documentMetadata = await documentMetadataRepository.getByCompany(companyId);
+        const { items } = await documentMetadataRepository.getByCompany(companyId);
 
         // ASSERT
-        expect(documentMetadata).toHaveLength(1);
-        expect(documentMetadata[0].id).toEqual(id);
+        expect(items).toHaveLength(1);
+        expect(items[0].id).toEqual(id);
       },
       { retries: 3 },
     );
@@ -42,10 +42,10 @@ describe('When getting document metadata by company', () => {
     await retry(
       async () => {
         // ACT
-        const documentMetadata = await documentMetadataRepository.getByCompany(companyId);
+        const { items } = await documentMetadataRepository.getByCompany(companyId);
 
         // ASSERT
-        expect(documentMetadata).toHaveLength(2);
+        expect(items).toHaveLength(2);
       },
       { retries: 3 },
     );

@@ -41,9 +41,9 @@ class DocumentMetadataRepository {
         ':companyId': companyId,
       },
     };
-    const { Items } = await this.documentClient.send(new QueryCommand(params));
+    const { Items, LastEvaluatedKey } = await this.documentClient.send(new QueryCommand(params));
 
-    return Items;
+    return { items: Items, nextToken: LastEvaluatedKey };
   }
 
   async getById({ companyId, id }) {
