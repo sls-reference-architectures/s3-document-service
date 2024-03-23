@@ -1,5 +1,6 @@
 import DocumentMetadataRepository from "../src/documentMetadataRepository";
 import DatabaseTestHelpers from "./databaseTestHelpers";
+import { createDocumentMetadataInput } from "./testDataGenerators";
 
 describe('When saving a document metadata', () => {
   let testHelpers;
@@ -16,6 +17,15 @@ describe('When saving a document metadata', () => {
 
 
   it('should succeed (baseline)', async () => {
+    // ARRANGE
+    const documentMetadataInput = await createDocumentMetadataInput();
 
+    // ACT
+    const documentMetadata = await documentMetadataRepository.create(documentMetadataInput);
+    testHelpers.trackKeyForTeardown(documentMetadata);
+
+    // ASSERT
+    expect(documentMetadata).toBeDefined();
+    expect(documentMetadata.id).toBeString();
   });
 });

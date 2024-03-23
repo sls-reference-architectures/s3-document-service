@@ -23,5 +23,10 @@
     "serverless-esbuild": "^1.52.1",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-prune-plugin": "^2.0.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.540.0",
+    "@aws-sdk/lib-dynamodb": "^3.540.0",
+    "ulid": "^2.3.0"
   }
 }
