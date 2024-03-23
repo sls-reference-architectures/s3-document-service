@@ -6,7 +6,6 @@ import { ulid } from 'ulid';
 import { createPreSignedPost } from '../s3Utils';
 
 const handler = async (event) => {
-  console.log(event);
   const {
     headers: { 'x-company-id': companyId },
     body: { fileName, sourceType },
@@ -14,7 +13,6 @@ const handler = async (event) => {
   const id = ulid();
   const preSignedPost = await createPreSignedPost({ companyId, fileName, id, sourceType });
   const headers = convertPreSignedPostFieldsToArray(preSignedPost.fields);
-  console.log('preSignedPost', preSignedPost);
 
   return {
     statusCode: 201,
