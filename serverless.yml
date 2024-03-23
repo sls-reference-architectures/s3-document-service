@@ -34,7 +34,7 @@ functions:
       - httpApi:
           method: GET
           path: /document-metadata/{id}
-          authorizer: 
+          authorizer:
             type: aws_iam
 
 plugins:

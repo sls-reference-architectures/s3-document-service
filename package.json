@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "npx jest --testMatch '**/?(*.)+(unit.test).js'",
+    "test:e2e": "npx jest --testMatch '**/?(*.)+(e2e.test).js' --config jest.config.e2e.js",
     "test:int": "npx jest --testMatch '**/?(*.)+(int.test).js' --config jest.config.int.js",
     "prepare": "husky"
   },
   "author": "Seth Orell",
   "license": "ISC",
   "devDependencies": {
+    "@aws-sdk/client-cloudformation": "^3.540.0",
     "@swc/core": "^1.4.8",
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.12",
