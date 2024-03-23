@@ -3,6 +3,7 @@ import { ulid } from 'ulid';
 const createDocumentMetadataInput = (overrideWith) => {
   const documentMetadataInput = {
     companyId: createTestId(),
+    id: createTestId(),
     objectKey: createTestId(),
   };
 

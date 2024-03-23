@@ -1,5 +1,4 @@
 import { DeleteCommand, GetCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
-import { ulid } from 'ulid';
 
 import getDynamoDbClient from './documentClient';
 
@@ -13,15 +12,14 @@ class DocumentMetadataRepository {
   }
 
   async create(documentMetadata) {
-    const itemToSave = { ...documentMetadata, id: ulid() };
     const params = {
       TableName: TABLE_NAME,
-      Item: itemToSave,
+      Item: documentMetadata,
     };
 
     await this.documentClient.send(new PutCommand(params));
 
-    return itemToSave;
+    return documentMetadata;
   }
 
   async delete({ companyId, id }) {

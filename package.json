@@ -37,7 +37,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.540.0",
+    "@aws-sdk/client-s3": "^3.540.0",
     "@aws-sdk/lib-dynamodb": "^3.540.0",
+    "@aws-sdk/s3-presigned-post": "^3.540.0",
     "ulid": "^2.3.0"
   },
   "lint-staged": {
