@@ -11,6 +11,7 @@ provider:
     maxPreviousDeploymentArtifacts: 5
     serverSideEncryption: AES256
   environment:
+    BUCKET_NAME: ${self:custom.bucketName}
     TABLE_NAME: ${self:custom.tableName}
   logRetentionInDays: 7
   name: aws
