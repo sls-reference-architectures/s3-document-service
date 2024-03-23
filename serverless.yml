@@ -59,20 +59,9 @@ resources:
           AttributeType: S
         - AttributeName: id
           AttributeType: S
-        - AttributeName: uploadedBy
-          AttributeType: S
         KeySchema:
         - AttributeName: companyId
           KeyType: HASH
         - AttributeName: id
           KeyType: RANGE
-        GlobalSecondaryIndexes:
-        - IndexName: GetByUploadedBy
-          KeySchema:
-          - AttributeName: uploadedBy
-            KeyType: HASH
-          - AttributeName: id
-            KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
