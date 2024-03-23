@@ -18,15 +18,15 @@ provider:
 
 custom:
   bucketName: com.reference-architecture.${self:service}
-  esbuild:
-    minify: true
+  # esbuild:
+  #   minify: true
   prune:
     automatic: true
     number: 1
   tableName: ${self:service}
 
 plugins:
-- serverless-esbuild
+# - serverless-esbuild
 - serverless-iam-roles-per-function
 - serverless-deployment-bucket
 - serverless-prune-plugin
