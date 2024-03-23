@@ -1,4 +1,4 @@
-import { AWSCreatePresignedPost } from '@aws-sdk/s3-presigned-post';
+import { createPresignedPost as AWSCreatePresignedPost } from '@aws-sdk/s3-presigned-post';
 import { ulid } from 'ulid';
 
 import getS3Client from './s3Client';
