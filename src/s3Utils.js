@@ -8,14 +8,15 @@ export const TenMinutesInSeconds = 600;
 const createPreSignedPost = async ({ companyId, fileName, id = ulid(), sourceType }) => {
   const objectKey = createObjectKey({ companyId, id });
   const s3Client = getS3Client();
-
-  return AWSCreatePresignedPost(s3Client, {
+  const preSignedPost = await AWSCreatePresignedPost(s3Client, {
     Bucket: process.env.BUCKET_NAME,
     Key: objectKey,
     Conditions: createConditions({ companyId, fileName, id, sourceType }),
     Fields: createHeaderFields(companyId),
     Expires: TenMinutesInSeconds,
   });
+
+  return preSignedPost;
 };
 
 const createObjectKey = ({ companyId, id }) => `${companyId}/${id}`;
