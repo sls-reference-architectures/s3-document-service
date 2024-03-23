@@ -38,6 +38,7 @@
     "ulid": "^2.3.0"
   },
   "lint-staged": {
-    "*.{js,md}": "npx eslint && npx prettier --write --ignore-path .gitignore"
+    "*.{js}": "eslint --cache --fix",
+    "*.{js,md}": "npx prettier . --write --ignore-path .gitignore"
   }
 }

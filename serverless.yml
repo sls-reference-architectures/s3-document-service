@@ -10,6 +10,8 @@ provider:
     name: com.reference-architecture.deploys
     maxPreviousDeploymentArtifacts: 5
     serverSideEncryption: AES256
+  environment:
+      TABLE_NAME: ${self:custom.tableName}
   logRetentionInDays: 7
   name: aws
   region: us-east-1
@@ -18,15 +20,23 @@ provider:
 
 custom:
   bucketName: com.reference-architecture.${self:service}
-  # esbuild:
-  #   minify: true
+  esbuild:
+    minify: true
   prune:
     automatic: true
     number: 1
   tableName: ${self:service}
 
+functions:
+  getDocumentMetadataById:
+    handler: src/handlers/getDocumentMetadataById.default
+    events:
+      - httpApi:
+          method: GET
+          path: /document-metadata/{id}
+
 plugins:
-# - serverless-esbuild
+- serverless-esbuild
 - serverless-iam-roles-per-function
 - serverless-deployment-bucket
 - serverless-prune-plugin
