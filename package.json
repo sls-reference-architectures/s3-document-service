@@ -44,6 +44,6 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
-    "*.{js,md,yml}": "npx prettier . --write --ignore-path .gitignore"
+    "*.{js,md,yml,json}": "npx prettier . --write --ignore-path .gitignore"
   }
 }
