@@ -4,12 +4,20 @@
   "description": "A model pre-signed upload/download document service with events and metadata",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:int": "npx jest --testMatch '**/?(*.)+(int.test).js' --config jest.config.int.js"
   },
   "author": "Seth Orell",
   "license": "ISC",
   "devDependencies": {
+    "@swc/core": "^1.4.8",
+    "@swc/jest": "^0.2.36",
+    "@types/jest": "^29.5.12",
     "esbuild": "^0.20.2",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "jest-extended": "^4.0.2",
+    "lint-staged": "^15.2.2",
     "serverless": "^3.38.0",
     "serverless-deployment-bucket": "^1.6.0",
     "serverless-esbuild": "^1.52.1",
