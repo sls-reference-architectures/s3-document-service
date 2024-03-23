@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 describe('When getting document metadata by id through API', () => {
-  it.skip('should return a 201', async () => {
+  it('should return a 201', async () => {
     // ARRANGE
     const axiosOptions = {
       baseURL: process.env.API_URL,
@@ -14,7 +14,7 @@ describe('When getting document metadata by id through API', () => {
     const payload = { fileName: 'foo.jpg', sourceType: 'bar' };
 
     // ACT
-    const response = await axios.post('/upload-link', payload, axiosOptions);
+    const response = await axios.post('/pre-signed-post', payload, axiosOptions);
 
     // ASSERT
     expect(response.status).toBe(201);

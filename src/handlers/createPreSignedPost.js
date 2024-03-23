@@ -14,7 +14,7 @@ const handler = async (event) => {
 
   return {
     statusCode: 201,
-    body: JSON.stringify({ uploadUrl: 'https://example.com' }),
+    body: JSON.stringify(preSignedPost),
   };
 };
 
