@@ -50,14 +50,29 @@ resources:
           BlockPublicPolicy: true
           IgnorePublicAcls: true
           RestrictPublicBuckets: true
-    # DocumentTable:
-    #   Type: AWS::DynamoDB::Table
-    #   Properties:
-    #     TableName: ${self:custom.tableName}
-    #     AttributeDefinitions:
-    #     - AttributeName: id
-    #       AttributeType: S
-    #     KeySchema:
-    #     - AttributeName: id
-    #       KeyType: HASH
-    #     BillingMode: PAY_PER_REQUEST
+    DocumentTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+        - AttributeName: companyId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: uploadedBy
+          AttributeType: S
+        KeySchema:
+        - AttributeName: companyId
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+        GlobalSecondaryIndexes:
+        - IndexName: GetByUploadedBy
+          KeySchema:
+          - AttributeName: uploadedBy
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
