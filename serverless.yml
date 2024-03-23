@@ -28,7 +28,7 @@ custom:
   tableName: ${self:service}
 
 functions:
-  getDocumentMetadataByIdTEMP:
+  getDocumentMetadataById:
     handler: src/handlers/getDocumentMetadataById.default
     events:
       - httpApi:
