@@ -12,7 +12,7 @@ const createPreSignedPost = async ({ companyId, fileName, id = ulid(), sourceTyp
     Bucket: process.env.BUCKET_NAME,
     Key: objectKey,
     Conditions: createConditions({ companyId, fileName, id, sourceType }),
-    Fields: createHeaderFields(companyId),
+    Fields: createHeaderFields({ companyId, fileName, id, sourceType }),
     Expires: TenMinutesInSeconds,
   });
 
