@@ -1,3 +1,6 @@
+import middy from '@middy/core';
+import httpErrorHandler from '@middy/http-error-handler';
+import eventNormalizer from '@middy/http-event-normalizer';
 import DocumentMetadataRepository from '../documentMetadataRepository';
 
 const repo = new DocumentMetadataRepository();
@@ -13,4 +16,4 @@ const handler = async (event) => {
   return documentMetadata;
 };
 
-export default handler;
+export default middy(handler).use(eventNormalizer()).use(httpErrorHandler());

@@ -1,5 +1,6 @@
 import DocumentMetadataRepository from '../src/documentMetadataRepository';
 import DatabaseTestHelpers from './databaseTestHelpers';
+import { createTestId } from './testDataGenerators';
 
 describe('When getting document metadata by id', () => {
   const testHelpers = new DatabaseTestHelpers();
@@ -9,14 +10,30 @@ describe('When getting document metadata by id', () => {
     await testHelpers.teardown();
   });
 
-  it('should succeed (baseline)', async () => {
-    // ARRANGE
-    const { id, companyId, objectKey } = await testHelpers.injectDocumentMetadata();
+  describe('when document metadata exists', () => {
+    it('should succeed (baseline)', async () => {
+      // ARRANGE
+      const { id, companyId, objectKey } = await testHelpers.injectDocumentMetadata();
 
-    // ACT
-    const documentMetadata = await documentMetadataRepository.getById({ id, companyId });
+      // ACT
+      const documentMetadata = await documentMetadataRepository.getById({ id, companyId });
 
-    // ASSERT
-    expect(documentMetadata.objectKey).toEqual(objectKey);
+      // ASSERT
+      expect(documentMetadata.objectKey).toEqual(objectKey);
+    });
+  });
+
+  describe('when document metadata does not exist', () => {
+    it('should throw not found', async () => {
+      // ARRANGE
+      const id = createTestId();
+      const companyId = createTestId();
+
+      // ACT
+      const getByIdAction = () => documentMetadataRepository.getById({ id, companyId });
+
+      // ASSERT
+      await expect(getByIdAction()).rejects.toThrow(/Not found/i);
+    });
   });
 });

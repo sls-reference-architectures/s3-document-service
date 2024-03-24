@@ -1,4 +1,5 @@
 import { DeleteCommand, GetCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { NotFound } from 'http-errors';
 
 import getDynamoDbClient from './documentClient';
 
@@ -49,8 +50,10 @@ class DocumentMetadataRepository {
       TableName: TABLE_NAME,
       Key: { companyId, id },
     };
-
     const { Item } = await this.documentClient.send(new GetCommand(params));
+    if (!Item) {
+      throw new NotFound(`Not Found: DocumentMetadata with companyId: ${companyId} and id: ${id}`);
+    }
 
     return Item;
   }
