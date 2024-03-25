@@ -77,6 +77,7 @@ const getSignedDownloadUrl = async ({ key, fileName }) => {
   const signedUrl = await getSignedUrl(s3Client, getObjectCommand, {
     expiresIn: SevenDaysInSeconds,
   });
+  console.log('Signed URL', signedUrl);
 
   return signedUrl;
 };
