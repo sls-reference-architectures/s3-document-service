@@ -17,6 +17,7 @@ const handler = async (event) => {
     companyId: Metadata.companyid,
     fileName: Metadata.filename,
     id: Metadata.fileid,
+    objectKey: key,
   };
   await repo.create(documentMetadata);
 };

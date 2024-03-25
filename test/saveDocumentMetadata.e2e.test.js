@@ -18,6 +18,7 @@ describe('When getting document metadata by id through API', () => {
       headers: {
         'x-company-id': companyId,
       },
+      validateStatus: () => true,
     };
     const payload = { fileName: `${createTestId()}.avif` };
     const { data: preSignedPost } = await axios.post('/pre-signed-post', payload, axiosOptions);
