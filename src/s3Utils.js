@@ -71,6 +71,7 @@ const getSignedDownloadUrl = async ({ key, fileName }) => {
     Key: key,
     ResponseContentDisposition: `attachment; filename="${fileName}"`,
   };
+  console.log('getObjectCommand', getObjectCommand);
   const s3Client = getS3Client();
   console.log('Got client', s3Client);
   const signedUrl = await getSignedUrl(s3Client, getObjectCommand, {
