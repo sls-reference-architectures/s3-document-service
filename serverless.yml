@@ -39,6 +39,13 @@ functions:
       - Effect: Allow
         Action: dynamodb:GetItem
         Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${self:custom.tableName}
+      - Effect: Allow
+        Action:
+          - 's3:Get*'
+          - 's3:List*'
+        Resource:
+          - arn:aws:s3:::${self:custom.fileBucketName}
+          - arn:aws:s3:::${self:custom.fileBucketName}/*
   listDocumentMetadata:
     handler: src/handlers/listDocumentMetadata.default
     events:

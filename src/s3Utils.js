@@ -1,10 +1,12 @@
 import { HeadObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { createPresignedPost as AWSCreatePresignedPost } from '@aws-sdk/s3-presigned-post';
 import { ulid } from 'ulid';
 
 import getS3Client from './s3Client';
 
 export const TenMinutesInSeconds = 600;
+const SevenDaysInSeconds = 604799; // 7 Days in Seconds
 
 const createPreSignedPost = async ({ companyId, fileName, id = ulid(), sourceType }) => {
   const objectKey = createObjectKey({ companyId, id });
@@ -62,4 +64,18 @@ const getHeadObject = async (key) => {
   return result;
 };
 
-export { createPreSignedPost, getHeadObject };
+const getSignedDownloadUrl = async ({ key, fileName }) => {
+  const getObjectCommand = {
+    Bucket: process.env.BUCKET_NAME,
+    Key: key,
+    ResponseContentDisposition: `attachment; filename="${fileName}"`,
+  };
+  const s3Client = getS3Client();
+  const signedUrl = await getSignedUrl(s3Client, getObjectCommand, {
+    expiresIn: SevenDaysInSeconds,
+  });
+
+  return signedUrl;
+};
+
+export { createPreSignedPost, getHeadObject, getSignedDownloadUrl };

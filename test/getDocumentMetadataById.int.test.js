@@ -19,6 +19,7 @@ describe('When getting document metadata by id', () => {
       const documentMetadata = await documentMetadataRepository.getById({ id, companyId });
 
       // ASSERT
+      console.log(documentMetadata);
       expect(documentMetadata.objectKey).toEqual(objectKey);
     });
   });
