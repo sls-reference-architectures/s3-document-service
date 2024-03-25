@@ -44,8 +44,8 @@ functions:
           - 's3:Get*'
           - 's3:List*'
         Resource:
-          - arn:aws:s3:::${self:custom.fileBucketName}
-          - arn:aws:s3:::${self:custom.fileBucketName}/*
+          - arn:aws:s3:::${self:custom.bucketName}
+          - arn:aws:s3:::${self:custom.bucketName}/*
   listDocumentMetadata:
     handler: src/handlers/listDocumentMetadata.default
     events:
