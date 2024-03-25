@@ -1,10 +1,12 @@
+import middy from '@middy/core';
+import ioLogger from '@middy/input-output-logger';
+
 import DocumentMetadataRepository from '../documentMetadataRepository';
 import { getHeadObject } from '../s3Utils';
 
 const repo = new DocumentMetadataRepository();
 
 const handler = async (event) => {
-  console.log(event);
   const {
     detail: {
       object: { key },
@@ -19,4 +21,4 @@ const handler = async (event) => {
   await repo.create(documentMetadata);
 };
 
-export default handler;
+export default middy(handler).use(ioLogger());
