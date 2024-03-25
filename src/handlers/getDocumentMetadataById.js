@@ -1,13 +1,13 @@
 import middy from '@middy/core';
 import httpErrorHandler from '@middy/http-error-handler';
 import eventNormalizer from '@middy/http-event-normalizer';
+import ioLogger from '@middy/input-output-logger';
 import DocumentMetadataRepository from '../documentMetadataRepository';
 import { getSignedDownloadUrl } from '../s3Utils';
 
 const repo = new DocumentMetadataRepository();
 
 const handler = async (event) => {
-  console.log(process.env);
   const {
     headers: { 'x-company-id': companyId },
     pathParameters: { id },
@@ -22,4 +22,4 @@ const handler = async (event) => {
   return documentMetadata;
 };
 
-export default middy(handler).use(eventNormalizer()).use(httpErrorHandler());
+export default middy(handler).use(eventNormalizer()).use(ioLogger()).use(httpErrorHandler());
