@@ -65,12 +65,14 @@ const getHeadObject = async (key) => {
 };
 
 const getSignedDownloadUrl = async ({ key, fileName }) => {
+  console.log('getSignedDownloadUrl', key, fileName);
   const getObjectCommand = {
     Bucket: process.env.BUCKET_NAME,
     Key: key,
     ResponseContentDisposition: `attachment; filename="${fileName}"`,
   };
   const s3Client = getS3Client();
+  console.log('Got client');
   const signedUrl = await getSignedUrl(s3Client, getObjectCommand, {
     expiresIn: SevenDaysInSeconds,
   });
