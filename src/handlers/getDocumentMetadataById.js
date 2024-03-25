@@ -7,6 +7,7 @@ import { getSignedDownloadUrl } from '../s3Utils';
 const repo = new DocumentMetadataRepository();
 
 const handler = async (event) => {
+  console.log(process.env);
   const {
     headers: { 'x-company-id': companyId },
     pathParameters: { id },
