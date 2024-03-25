@@ -1,4 +1,4 @@
-import { HeadObjectCommand } from '@aws-sdk/client-s3';
+import { GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { createPresignedPost as AWSCreatePresignedPost } from '@aws-sdk/s3-presigned-post';
 import { ulid } from 'ulid';
@@ -65,19 +65,15 @@ const getHeadObject = async (key) => {
 };
 
 const getSignedDownloadUrl = async ({ key, fileName }) => {
-  console.log('getSignedDownloadUrl', key, fileName);
-  const getObjectCommand = {
+  const getObjectCommandInput = {
     Bucket: process.env.BUCKET_NAME,
     Key: key,
     ResponseContentDisposition: `attachment; filename="${fileName}"`,
   };
-  console.log('getObjectCommand', getObjectCommand);
   const s3Client = getS3Client();
-  console.log('Got client', s3Client);
-  const signedUrl = await getSignedUrl(s3Client, getObjectCommand, {
+  const signedUrl = await getSignedUrl(s3Client, new GetObjectCommand(getObjectCommandInput), {
     expiresIn: SevenDaysInSeconds,
   });
-  console.log('Signed URL', signedUrl);
 
   return signedUrl;
 };
