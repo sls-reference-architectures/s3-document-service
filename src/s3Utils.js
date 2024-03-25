@@ -59,9 +59,14 @@ const getHeadObject = async (key) => {
   };
   const command = new HeadObjectCommand(input);
   const s3Client = getS3Client();
-  const result = await s3Client.send(command);
+  try {
+    const result = await s3Client.send(command);
 
-  return result;
+    return result;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
 
 const getSignedDownloadUrl = async ({ key, fileName }) => {
