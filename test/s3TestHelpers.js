@@ -22,7 +22,6 @@ class S3TestHelpers {
         Bucket: this.bucketName,
         Key: key,
       };
-      console.log(deleteObjectCmdInput);
       await this.client.send(new DeleteObjectCommand(deleteObjectCmdInput));
     });
     await Promise.all(deletePromises);
