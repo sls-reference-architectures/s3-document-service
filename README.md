@@ -2,6 +2,10 @@
 
 A model pre-signed upload/download document service with events and metadata
 
+## Architecture
+
+![image](ArchDiagram.png)
+
 ## Database
 
 DynamoDB
