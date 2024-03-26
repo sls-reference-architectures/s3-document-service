@@ -2,6 +2,22 @@
 
 A model pre-signed upload/download document service with events and metadata
 
+## Installation/Deployment
+
+```bash
+npm ci
+npx sls deploy # Needs AWS credentials somewhere
+```
+
+## Testing
+
+```bash
+npm ci
+npm t # to run unit tests
+npm run test:int # to run pre-deploy integration tests
+npm run test:e2e # to run post-deploy end-to-end tests
+```
+
 ## Architecture
 
 ![image](ArchDiagram.png)
