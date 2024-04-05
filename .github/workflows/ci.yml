@@ -33,10 +33,10 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-      - name: Run int tests
-        run: npm run test:int
       - name: Deploy
         run: npx sls deploy
+      - name: Run int tests
+        run: npm run test:int
       - name: E2E Test
         run: npm run test:e2e
       - name: Tear down
