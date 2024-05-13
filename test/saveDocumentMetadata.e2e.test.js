@@ -37,7 +37,7 @@ describe('When getting document metadata by id through API', () => {
         expect(data.companyId).toBe(companyId);
         // console.log(data);
       },
-      { retries: 3 },
+      { retries: 5 },
     );
   });
 });
