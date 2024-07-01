@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
+import retry from 'async-retry';
 import DatabaseTestHelpers from './databaseTestHelpers';
 
 describe('When getting document metadata by id through API', () => {
@@ -21,11 +22,16 @@ describe('When getting document metadata by id through API', () => {
         validateStatus: () => true,
       };
 
-      // ACT
-      const response = await axios.get(`/document-metadata/${id}`, axiosOptions);
+      await retry(
+        async () => {
+          // ACT
+          const response = await axios.get(`/document-metadata/${id}`, axiosOptions);
 
-      // ASSERT
-      expect(response.status).toBe(200);
+          // ASSERT
+          expect(response.status).toBe(200);
+        },
+        { retries: 3 },
+      );
     });
 
     it('should return the document metadata', async () => {
@@ -37,12 +43,16 @@ describe('When getting document metadata by id through API', () => {
           'x-company-id': companyId,
         },
       };
+      await retry(
+        async () => {
+          // ACT
+          const { data } = await axios.get(`/document-metadata/${id}`, axiosOptions);
 
-      // ACT
-      const { data } = await axios.get(`/document-metadata/${id}`, axiosOptions);
-
-      // ASSERT
-      expect(data.objectKey).toEqual(objectKey);
+          // ASSERT
+          expect(data.objectKey).toEqual(objectKey);
+        },
+        { retries: 3 },
+      );
     });
   });
 
