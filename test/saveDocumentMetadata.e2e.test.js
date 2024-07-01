@@ -22,7 +22,7 @@ describe('When getting document metadata by id through API', () => {
     };
     const payload = { fileName: `${createTestId()}.avif` };
     const { data: preSignedPost } = await axios.post('/pre-signed-post', payload, axiosOptions);
-    console.log('preSignedPost', preSignedPost);
+    // console.log('preSignedPost', preSignedPost);
     await s3TestHelpers.uploadTestFile(preSignedPost);
 
     await retry(
