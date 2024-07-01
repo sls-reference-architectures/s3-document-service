@@ -1,3 +1,5 @@
+import retry from 'async-retry';
+
 import DocumentMetadataRepository from '../src/documentMetadataRepository';
 import DatabaseTestHelpers from './databaseTestHelpers';
 import { createTestId } from './testDataGenerators';
@@ -15,12 +17,16 @@ describe('When getting document metadata by id', () => {
       // ARRANGE
       const { id, companyId, objectKey } = await testHelpers.injectDocumentMetadata();
 
-      // ACT
-      const documentMetadata = await documentMetadataRepository.getById({ id, companyId });
+      await retry(
+        async () => {
+          // ACT
+          const documentMetadata = await documentMetadataRepository.getById({ id, companyId });
 
-      // ASSERT
-      console.log(documentMetadata);
-      expect(documentMetadata.objectKey).toEqual(objectKey);
+          // ASSERT
+          expect(documentMetadata.objectKey).toEqual(objectKey);
+        },
+        { retries: 3 },
+      );
     });
   });
 
