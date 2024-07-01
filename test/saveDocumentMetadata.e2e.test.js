@@ -18,22 +18,11 @@ describe('When getting document metadata by id through API', () => {
       headers: {
         'x-company-id': companyId,
       },
-      // validateStatus: () => true,
+      validateStatus: () => true,
     };
-    console.log('axios options', axiosOptions);
     const payload = { fileName: `${createTestId()}.avif` };
-    let preSignedPost;
-    try {
-      const { data, status } = await axios.post('/pre-signed-post', payload, axiosOptions);
-      console.log('status', status);
-      console.log('error?', preSignedPost);
-      // console.log('preSignedPost', preSignedPost.url);
-      await s3TestHelpers.uploadTestFile(preSignedPost);
-      preSignedPost = data;
-    } catch (error) {
-      console.log('error', error.toJSON());
-      throw error;
-    }
+    const { data: preSignedPost } = await axios.post('/pre-signed-post', payload, axiosOptions);
+    await s3TestHelpers.uploadTestFile(preSignedPost);
 
     await retry(
       async () => {
@@ -46,7 +35,6 @@ describe('When getting document metadata by id through API', () => {
         // ASSERT
         expect(status).toBe(200);
         expect(data.companyId).toBe(companyId);
-        // console.log(data);
       },
       { retries: 5 },
     );
