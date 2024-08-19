@@ -42,7 +42,7 @@
     "@aws-sdk/client-s3": "^3.621.0",
     "@aws-sdk/lib-dynamodb": "^3.631.0",
     "@aws-sdk/s3-presigned-post": "^3.627.0",
-    "@aws-sdk/s3-request-presigner": "^3.621.0",
+    "@aws-sdk/s3-request-presigner": "^3.633.0",
     "@middy/core": "^5.4.5",
     "@middy/http-error-handler": "^5.4.5",
     "@middy/http-event-normalizer": "^5.4.5",
