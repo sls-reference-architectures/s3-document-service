@@ -38,7 +38,7 @@
     "serverless-prune-plugin": "^2.0.2"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.632.0",
+    "@aws-sdk/client-dynamodb": "^3.658.1",
     "@aws-sdk/client-s3": "^3.621.0",
     "@aws-sdk/lib-dynamodb": "^3.637.0",
     "@aws-sdk/s3-presigned-post": "^3.627.0",
