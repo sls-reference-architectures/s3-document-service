@@ -12,7 +12,7 @@
   "author": "Seth Orell",
   "license": "ISC",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.621.0",
+    "@aws-sdk/client-cloudformation": "^3.670.0",
     "@faker-js/faker": "^8.4.1",
     "@swc/core": "^1.7.22",
     "@swc/jest": "^0.2.36",
