@@ -14,7 +14,7 @@
   "author": "Seth Orell",
   "license": "ISC",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.693.0",
+    "@aws-sdk/client-cloudformation": "^3.782.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.24.0",
     "@faker-js/faker": "^9.6.0",
