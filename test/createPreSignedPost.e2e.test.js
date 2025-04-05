@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import { faker } from '@faker-js/faker';
 import { createTestId } from './testDataGenerators';

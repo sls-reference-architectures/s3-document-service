@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 import util from 'util';
 import fs from 'fs/promises';

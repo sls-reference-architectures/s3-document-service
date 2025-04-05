@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import retry from 'async-retry';
 import { createTestId } from './testDataGenerators';

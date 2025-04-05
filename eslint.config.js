@@ -1,4 +1,3 @@
-// eslint-disable import/no-extraneous-dependencies
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import { fileURLToPath } from 'url';
@@ -41,7 +40,7 @@ export default [
       'import/extensions': 0,
       'no-use-before-define': 'off',
       'no-only-tests/no-only-tests': 'error',
-      'no-console': 2,
+      'no-console': 1,
     },
     plugins: {
       'no-only-tests': noOnlyTests,
