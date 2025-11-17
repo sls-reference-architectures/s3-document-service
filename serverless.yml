@@ -18,6 +18,8 @@ provider:
   region: us-east-1
   runtime: nodejs22.x
   stage: dev
+  tags:
+    lumigo:auto-trace: 'true'
 
 custom:
   bucketName: com.reference-architecture.${self:service}
