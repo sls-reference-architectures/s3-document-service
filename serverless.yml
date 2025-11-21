@@ -13,7 +13,7 @@ provider:
   environment:
     BUCKET_NAME: ${self:custom.bucketName}
     TABLE_NAME: ${self:custom.tableName}
-  logRetentionInDays: 7
+  logRetentionInDays: 28
   name: aws
   region: us-east-1
   runtime: nodejs22.x
