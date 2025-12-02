@@ -23,6 +23,11 @@ provider:
 
 custom:
   bucketName: com.reference-architecture.${self:service}
+  datadog:
+    apiKey: ${ssm:/aws/reference/secretsmanager/dd-api-key}
+    captureLambdaPayload: true
+    enableDDLogs: true
+    site: datadoghq.com
   esbuild:
     minify: true
   prune:
