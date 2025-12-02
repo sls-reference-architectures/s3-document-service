@@ -37,7 +37,7 @@
     "prettier": "^3.6.2",
     "request": "^2.88.2",
     "serverless-deployment-bucket": "^1.6.0",
-    "serverless-esbuild": "^1.55.2",
+    "serverless-esbuild": "^1.56.1",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-plugin-datadog": "^5.113.0",
     "serverless-prune-plugin": "^2.1.0"
