@@ -53,7 +53,7 @@
     "@middy/http-event-normalizer": "^6.4.5",
     "@middy/http-json-body-parser": "^6.4.5",
     "@middy/input-output-logger": "^6.4.5",
-    "http-errors": "^2.0.0",
+    "http-errors": "^2.0.1",
     "ulid": "^3.0.1"
   },
   "lint-staged": {
