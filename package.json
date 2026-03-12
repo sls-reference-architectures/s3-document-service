@@ -39,7 +39,7 @@
     "serverless-deployment-bucket": "^1.6.0",
     "serverless-esbuild": "^1.56.1",
     "serverless-iam-roles-per-function": "^3.2.0",
-    "serverless-plugin-datadog": "^5.121.2",
+    "serverless-plugin-datadog": "^5.122.1",
     "serverless-prune-plugin": "^2.1.0"
   },
   "dependencies": {
