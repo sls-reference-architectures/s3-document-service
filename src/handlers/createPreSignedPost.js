@@ -5,7 +5,7 @@ import { ulid } from 'ulid';
 
 import { createPreSignedPost } from '../s3Utils';
 
-const handler = async (event) => {
+const createPreSignedPostHandler = async (event) => {
   const {
     headers: { 'x-company-id': companyId },
     body: { fileName, sourceType },
@@ -30,4 +30,6 @@ const convertPreSignedPostFieldsToArray = (preSignedPostFields) => {
   return headers;
 };
 
-export default middy(handler).use(eventNormalizer()).use(jsonBodyParser());
+export const handler = middy(createPreSignedPostHandler)
+  .use(eventNormalizer())
+  .use(jsonBodyParser());

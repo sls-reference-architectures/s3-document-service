@@ -6,7 +6,7 @@ import { getHeadObject } from '../s3Utils';
 
 const repo = new DocumentMetadataRepository();
 
-const handler = async (event) => {
+const saveDocumentMetadataHandler = async (event) => {
   const {
     detail: {
       object: { key },
@@ -22,4 +22,4 @@ const handler = async (event) => {
   await repo.create(documentMetadata);
 };
 
-export default middy(handler).use(ioLogger());
+export const handler = middy(saveDocumentMetadataHandler).use(ioLogger());

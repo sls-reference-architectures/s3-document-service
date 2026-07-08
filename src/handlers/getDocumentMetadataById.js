@@ -7,7 +7,7 @@ import { getSignedDownloadUrl } from '../s3Utils';
 
 const repo = new DocumentMetadataRepository();
 
-const handler = async (event) => {
+const getDocumentMetadataByIdHandler = async (event) => {
   const {
     headers: { 'x-company-id': companyId },
     pathParameters: { id },
@@ -22,4 +22,7 @@ const handler = async (event) => {
   return documentMetadata;
 };
 
-export default middy(handler).use(eventNormalizer()).use(ioLogger()).use(httpErrorHandler());
+export const handler = middy(getDocumentMetadataByIdHandler)
+  .use(eventNormalizer())
+  .use(ioLogger())
+  .use(httpErrorHandler());

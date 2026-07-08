@@ -2,7 +2,7 @@ import DocumentMetadataRepository from '../documentMetadataRepository';
 
 const repo = new DocumentMetadataRepository();
 
-const handler = async (event) => {
+export const handler = async (event) => {
   console.log(event);
   const {
     headers: { 'x-company-id': companyId },
@@ -11,5 +11,3 @@ const handler = async (event) => {
 
   return { items, nextToken };
 };
-
-export default handler;
