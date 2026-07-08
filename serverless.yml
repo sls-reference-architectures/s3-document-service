@@ -23,16 +23,8 @@ provider:
 
 custom:
   bucketName: com.reference-architecture.${self:service}
-  datadog:
-    apiKey: ${ssm:/aws/reference/secretsmanager/dd-api-key}
-    captureLambdaPayload: true
-    enableDDLogs: true
-    site: datadoghq.com
   esbuild:
     minify: true
-  prune:
-    automatic: true
-    number: 1
   tableName: ${self:service}
 
 functions:
@@ -104,8 +96,6 @@ package:
 plugins:
   - serverless-esbuild
   - serverless-iam-roles-per-function
-  - serverless-prune-plugin
-  - serverless-plugin-datadog
 
 resources:
   Resources:
