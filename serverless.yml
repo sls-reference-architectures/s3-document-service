@@ -1,6 +1,6 @@
 service: s3-document-service
 
-frameworkVersion: 3.x
+frameworkVersion: '4'
 
 configValidationMode: error
 
