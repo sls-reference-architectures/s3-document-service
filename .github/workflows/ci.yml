@@ -43,5 +43,5 @@ jobs:
         run: npm run test:e2e
       - name: E2E Test
         run: npm run test:e2e
-      # - name: Tear down
-      #   run: npx sls remove
+      - name: Tear down stack
+        run: npx sls remove
