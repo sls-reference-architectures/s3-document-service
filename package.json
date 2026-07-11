@@ -12,7 +12,7 @@
     "prepare": "husky"
   },
   "author": "Seth Orell",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@aws-sdk/client-cloudformation": "^3.1007.0",
     "@eslint/eslintrc": "^3.3.1",
