@@ -4,5 +4,5 @@ module.exports = {
     '^.+\\.jsx?$': '@swc/jest',
   },
   testEnvironment: 'node',
-  transformIgnorePatterns: ['/node_modules/?!@faker-js/faker'],
+  transformIgnorePatterns: ['node_modules/(?!@faker-js/faker)'],
 };
