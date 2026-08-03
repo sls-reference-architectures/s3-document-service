@@ -35,6 +35,7 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          action-timeout-s: 300
       - name: Deploy
         run: npx sls deploy
       - name: Run int tests
