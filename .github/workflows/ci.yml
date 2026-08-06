@@ -34,31 +34,6 @@ jobs:
           aws-region: us-east-1
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           action-timeout-s: 300
-      - name: Preflight cleanup
-        # A prior run's teardown can race with an in-flight/duplicate async
-        # Lambda invocation (e.g. an EventBridge retry), leaving an orphaned
-        # CloudWatch log group behind after the stack is deleted. AWS's
-        # ResourceExistenceCheck then blocks the next deploy's change set.
-        # Clear stale state here so a leftover doesn't fail an otherwise-good run.
-        run: |
-          set -e
-          STACK_NAME=s3-document-service-dev
-          STATUS=$(aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region us-east-1 --query 'Stacks[0].StackStatus' --output text 2>/dev/null || echo "MISSING")
-
-          if [ "$STATUS" = "REVIEW_IN_PROGRESS" ] || [ "$STATUS" = "ROLLBACK_COMPLETE" ]; then
-            echo "Stack is in $STATUS with no real resources; deleting it."
-            aws cloudformation delete-stack --stack-name "$STACK_NAME" --region us-east-1
-            aws cloudformation wait stack-delete-complete --stack-name "$STACK_NAME" --region us-east-1
-            STATUS="MISSING"
-          fi
-
-          if [ "$STATUS" = "MISSING" ]; then
-            LOG_GROUPS=$(aws logs describe-log-groups --log-group-name-prefix "/aws/lambda/$STACK_NAME-" --region us-east-1 --query 'logGroups[].logGroupName' --output text)
-            for LOG_GROUP in $LOG_GROUPS; do
-              echo "Deleting orphaned log group $LOG_GROUP"
-              aws logs delete-log-group --log-group-name "$LOG_GROUP" --region us-east-1
-            done
-          fi
       - name: Deploy
         run: npx sls deploy
       - name: Run int tests
