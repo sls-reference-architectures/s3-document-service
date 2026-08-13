@@ -18,6 +18,13 @@ npm run test:int # to run pre-deploy integration tests
 npm run test:e2e # to run post-deploy end-to-end tests
 ```
 
+## Authorization
+
+The HTTP API is protected with IAM authorization (`authorizer: type: aws_iam`),
+so every request must be SigV4-signed by a caller holding `execute-api:Invoke`
+on the endpoint. Note this protects the _API_; the pre-signed S3 links it hands
+back are separately time-limited and are used unsigned.
+
 ## Architecture
 
 ![image](ArchDiagram.png)

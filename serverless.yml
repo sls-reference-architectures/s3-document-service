@@ -32,6 +32,8 @@ functions:
       - httpApi:
           method: GET
           path: /document-metadata/{id}
+          authorizer:
+            type: aws_iam
     iamRoleStatements:
       - Effect: Allow
         Action: dynamodb:GetItem
@@ -49,6 +51,8 @@ functions:
       - httpApi:
           method: GET
           path: /document-metadata
+          authorizer:
+            type: aws_iam
     iamRoleStatements:
       - Effect: Allow
         Action: dynamodb:Query
@@ -79,6 +83,8 @@ functions:
       - httpApi:
           method: POST
           path: /pre-signed-post
+          authorizer:
+            type: aws_iam
     iamRoleStatements:
       - Effect: Allow
         Action:
