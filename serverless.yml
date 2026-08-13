@@ -112,6 +112,14 @@ resources:
             - ServerSideEncryptionByDefault:
                 SSEAlgorithm: AES256
         BucketName: ${self:custom.bucketName}
+        # Uploads here are test fixtures, not real documents. Expiring them
+        # keeps the bucket empty so `sls remove` can always delete it — a
+        # single stray object is enough to block a teardown.
+        LifecycleConfiguration:
+          Rules:
+            - Id: ExpireUploads
+              Status: Enabled
+              ExpirationInDays: 1
         NotificationConfiguration:
           EventBridgeConfiguration:
             EventBridgeEnabled: true
