@@ -18,6 +18,13 @@ npm run test:int # to run pre-deploy integration tests
 npm run test:e2e # to run post-deploy end-to-end tests
 ```
 
+## Deployed environment
+
+The `dev` stack is left deployed between CI runs rather than torn down after
+each one, which is safe because the API requires IAM auth (below). A weekly
+[teardown workflow](.github/workflows/teardown.yml) removes it so the next
+push exercises a cold create, not just an update.
+
 ## Authorization
 
 The HTTP API is protected with IAM authorization (`authorizer: type: aws_iam`),
