@@ -5,6 +5,9 @@ import axios from 'axios';
 import getS3Client from '../src/s3Client';
 
 const UPLOAD_NAME = 'reach-for-the-sky.avif';
+// A clean instance: the default axios carries the aws4 signing interceptor
+// used for IAM-authed API calls, and a pre-signed S3 POST must not be signed.
+const uploader = axios.create();
 
 class S3TestHelpers {
   constructor() {
@@ -35,7 +38,7 @@ class S3TestHelpers {
       if (header.name === 'key') key = header.value;
     });
     form.append('file', new Blob([fileToUpload]), UPLOAD_NAME);
-    const { status } = await axios.post(url, form, { validateStatus: () => true });
+    const { status } = await uploader.post(url, form, { validateStatus: () => true });
     expect(status).toBe(204);
     this.uploadedObjectKeys.push(key);
   }
