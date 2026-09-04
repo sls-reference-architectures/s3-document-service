@@ -1,12 +1,10 @@
 import { DeleteObjectCommand } from '@aws-sdk/client-s3';
-import util from 'util';
 import fs from 'fs/promises';
 import { join } from 'path';
-import request from 'request';
+import axios from 'axios';
 import getS3Client from '../src/s3Client';
 
 const UPLOAD_NAME = 'reach-for-the-sky.avif';
-const requestAsync = util.promisify(request);
 
 class S3TestHelpers {
   constructor() {
@@ -29,19 +27,17 @@ class S3TestHelpers {
   async uploadTestFile({ url, headers }) {
     const filePath = join(__dirname, 'resources', UPLOAD_NAME);
     const fileToUpload = await fs.readFile(filePath);
-    const formData = {};
+    // S3 pre-signed POST: every signed field first, the file strictly last.
+    const form = new FormData();
+    let key;
     headers.forEach((header) => {
-      formData[header.name] = header.value;
+      form.append(header.name, header.value);
+      if (header.name === 'key') key = header.value;
     });
-    formData.file = fileToUpload;
-    const options = {
-      method: 'POST',
-      url,
-      formData,
-    };
-    const { statusCode } = await requestAsync(options);
-    expect(statusCode).toBe(204);
-    this.uploadedObjectKeys.push(formData.key);
+    form.append('file', new Blob([fileToUpload]), UPLOAD_NAME);
+    const { status } = await axios.post(url, form, { validateStatus: () => true });
+    expect(status).toBe(204);
+    this.uploadedObjectKeys.push(key);
   }
 }
 
