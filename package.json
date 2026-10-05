@@ -28,7 +28,7 @@
     "eslint-plugin-no-only-tests": "^3.4.0",
     "globals": "^17.12.0",
     "husky": "^9.1.7",
-    "jest": "^30.4.2",
+    "jest": "^30.5.2",
     "jest-extended": "^7.0.0",
     "lint-staged": "^17.3.0",
     "osls": "^4.4.0",
